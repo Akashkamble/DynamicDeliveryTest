@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity(), SplitInstallStateUpdatedListener {
     }
 
 
-    fun getClassName(): Class<*>? {
+    private fun getClassName(): Class<*>? {
         return try {
             Class.forName("com.akash.dynamicfeature.DynamicFeatureActivity")
         } catch (e: ClassNotFoundException) {
@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity(), SplitInstallStateUpdatedListener {
             SplitInstallSessionStatus.INSTALLED -> {
                 showShortToast("Installed")
                 getClassName()?.let { activityClass ->
-                    startActivity(Intent(this, activityClass))
+                    startActivityForResult(Intent(this, activityClass), 345)
                 }
             }
             SplitInstallSessionStatus.CANCELED -> {
